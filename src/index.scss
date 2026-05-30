@@ -1,0 +1,77 @@
+@use 'sass:list';
+
+body,
+html {
+  background-image: url("./Backgrounds/Background_Green_Felt.png");
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.plaing-card {
+  width: 28px;
+  height: 38px;
+  background-image: url("./Spritesheet_Cards_Big.png");
+}
+
+// .plaing-card-1 {
+//   background-position: -27px 0px;
+// }
+$Suits: (
+  spades,
+  hearts,
+  clubs,
+  diamonds
+);
+
+@each $suit in $Suits {
+
+  //calc(-1 * calc(27px * (index($Suits, $suit) + 1)));
+  @for $i from 1 through 13 {
+    .plaing-card-#{$suit}-#{$i} {
+      --y: #{list.index($Suits, $suit)};
+
+      @if $i ==13 {
+        background-position-x: -27px;
+        background-position-y: calc(38px * var(--y));
+      }
+
+      @else {
+        background-position-x: calc(-1 * calc(27px * (#{$i} + 1)));
+        background-position-y: calc(38px * var(--y));
+      }
+    }
+  }
+}
+.is-closed{
+  background-image: url("./Spritesheet_Cards_Big.png");
+  background-position: 0px 0px;
+}
+.deck{
+  position: absolute;
+  top: 0;
+  left: 0;
+  .plaing-card{
+    position: absolute;
+  }
+}
+.table-place{
+  position: absolute;
+
+}
+.place-1{
+  width: 28px;
+  height: 38px;
+  background-color: rgba(0, 255, 85, 0.5);
+}
